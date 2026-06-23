@@ -1,0 +1,63 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: jobspark_db_prod
+    environment:
+      POSTGRES_USER: jobspark
+      POSTGRES_PASSWORD: jobspark123
+      POSTGRES_DB: jobspark_prod
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata_prod:/var/lib/postgresql/data
+    networks:
+      - jobspark_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: jobspark_redis_prod
+    ports:
+      - "6379:6379"
+    networks:
+      - jobspark_network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: jobspark_backend_prod
+    environment:
+      - DATABASE_URL=postgresql://jobspark:jobspark123@postgres:5432/jobspark_prod
+      - REDIS_URL=redis://redis:6379
+      - PORT=3002
+      - JWT_SECRET=your_super_secret_jwt_key_change_in_production
+    ports:
+      - "3002:3002"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - jobspark_network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: jobspark_frontend_prod
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:3002
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - jobspark_network
+
+volumes:
+  pgdata_prod:
+
+networks:
+  jobspark_network:
+    driver: bridge

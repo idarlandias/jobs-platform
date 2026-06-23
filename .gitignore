@@ -1,0 +1,21 @@
+# deps
+node_modules/
+.venv/
+
+# env / secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# build
+.next/
+dist/
+*.tsbuildinfo
+
+# prisma
+backend/prisma/*.db
+
+# os / editor
+.DS_Store
+Thumbs.db
