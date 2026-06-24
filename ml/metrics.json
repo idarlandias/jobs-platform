@@ -1,0 +1,75 @@
+{
+  "classificacao": {
+    "modelo_escolhido": "LogisticRegression",
+    "criterio_selecao": "maior F1 em validacao cruzada (5-fold)",
+    "acuracia": 0.9183,
+    "precisao": 0.9145,
+    "recall": 0.9044,
+    "f1_score": 0.9094,
+    "roc_auc": 0.9782,
+    "f1_cv5_media": 0.9058,
+    "matriz_confusao": [
+      [
+        305,
+        23
+      ],
+      [
+        26,
+        246
+      ]
+    ],
+    "comparacao_modelos": {
+      "LogisticRegression": {
+        "f1_cv5": 0.9058,
+        "f1_teste": 0.9094,
+        "acuracia": 0.9183,
+        "roc_auc": 0.9782
+      },
+      "RandomForestClassifier": {
+        "f1_cv5": 0.8859,
+        "f1_teste": 0.8762,
+        "acuracia": 0.8883,
+        "roc_auc": 0.9665
+      },
+      "GradientBoostingClassifier": {
+        "f1_cv5": 0.8991,
+        "f1_teste": 0.9028,
+        "acuracia": 0.9117,
+        "roc_auc": 0.9762
+      }
+    },
+    "n_treino": 2400,
+    "n_teste": 600
+  },
+  "regressao": {
+    "modelo_escolhido": "GradientBoostingRegressor",
+    "criterio_selecao": "maior R2 em validacao cruzada (5-fold)",
+    "mae_reais": 969.88,
+    "rmse_reais": 1284.1,
+    "r2": 0.9492,
+    "mape_pct": 5.86,
+    "r2_cv5_media": 0.9486,
+    "comparacao_modelos": {
+      "LinearRegression": {
+        "r2_cv5": 0.9145,
+        "r2_teste": 0.9145,
+        "mae_reais": 1297.5,
+        "rmse_reais": 1666.79
+      },
+      "RandomForestRegressor": {
+        "r2_cv5": 0.9446,
+        "r2_teste": 0.9451,
+        "mae_reais": 994.48,
+        "rmse_reais": 1335.72
+      },
+      "GradientBoostingRegressor": {
+        "r2_cv5": 0.9486,
+        "r2_teste": 0.9492,
+        "mae_reais": 969.88,
+        "rmse_reais": 1284.1
+      }
+    },
+    "n_treino": 2400,
+    "n_teste": 600
+  }
+}

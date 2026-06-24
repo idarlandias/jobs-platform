@@ -1,68 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
-
-const DIFFERENTIATORS = [
-  {
-    icon: "🎯",
-    title: "Match Score Transparente",
-    desc: "Visualize exatamente a porcentagem de adequação do seu perfil a cada vaga antes mesmo de enviar sua candidatura.",
-    badge: "IA Bidirecional"
-  },
-  {
-    icon: "⚡",
-    title: "Candidatura em 1-Clique",
-    desc: "Salve suas informações e portfólio. Nunca mais preencha formulários de 5 páginas repetidamente para cada vaga.",
-    badge: "Foco em UX"
-  },
-  {
-    icon: "📡",
-    title: "Status em Tempo Real",
-    desc: "Acompanhe cada movimentação no seu processo seletivo em tempo real via notificações automáticas. Sem vácuos.",
-    badge: "Comunicação"
-  },
-  {
-    icon: "💡",
-    title: "Feedback de IA no Currículo",
-    desc: "Faça o upload do seu currículo e receba dicas de melhoria automáticas baseadas em vagas reais da sua área.",
-    badge: "Gratuito"
-  },
-  {
-    icon: "🔍",
-    title: "Busca por Linguagem Natural",
-    desc: "Pesquise por vagas escrevendo: 'quero trabalhar com IA em startup remota de FinTech' e encontre correspondências exatas por vetor.",
-    badge: "pgvector"
-  },
-  {
-    icon: "📋",
-    title: "Pipeline Kanban Visual",
-    desc: "Para as empresas: gerencie candidatos arrastando e soltando cartões em etapas customizadas de forma fluida.",
-    badge: "Para Recrutadores"
-  },
-  {
-    icon: "🎥",
-    title: "Entrevistas Assíncronas",
-    desc: "Grave suas respostas em vídeo quando e de onde preferir. Sem conflitos de agenda na primeira triagem.",
-    badge: "Praticidade"
-  },
-  {
-    icon: "🛡️",
-    title: "Sem SPAM de Recrutador",
-    desc: "Mantenha seus dados seguros. Empresas parceiras só podem contatar você após o seu aceite explícito de convite.",
-    badge: "Privacidade"
-  },
-  {
-    icon: "💰",
-    title: "Transparência Salarial",
-    desc: "Todas as vagas da plataforma exigem a divulgação da faixa salarial mínima e máxima. Chega de surpresas.",
-    badge: "Obrigatório"
-  },
-  {
-    icon: "📈",
-    title: "Analytics do Candidato",
-    desc: "Veja estatísticas de quantas vezes seu perfil apareceu em buscas, quantas visitas recebeu e quais competências estão em alta.",
-    badge: "Estatísticas"
-  }
-];
+import Differentiators from '@/components/Differentiators';
+import LandingCtas from '@/components/LandingCtas';
 
 export default function Home() {
   return (
@@ -82,14 +20,7 @@ export default function Home() {
           Cansado de se candidatar em portais e cair em um buraco negro sem feedback? O JobSpark dá o poder de volta ao candidato com feedback em tempo real e inteligência mútua.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/register?role=CANDIDATE" className="px-8 py-4 font-semibold text-white rounded-2xl accent-glow-gradient hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center">
-            Quero Me Candidatar
-          </Link>
-          <Link href="/register?role=COMPANY" className="px-8 py-4 font-semibold text-slate-200 rounded-2xl glass-card hover:bg-slate-900/60 border border-slate-700/50 hover:border-slate-500/50 transition-all duration-300 flex items-center justify-center">
-            Anunciar Vaga
-          </Link>
-        </div>
+        <LandingCtas size="lg" />
       </div>
 
       {/* Stats Counter Section */}
@@ -118,35 +49,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {DIFFERENTIATORS.map((diff, index) => (
-            <div 
-              key={index} 
-              className="p-8 rounded-3xl glass-card glass-card-hover flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-2xl">
-                    {diff.icon}
-                  </div>
-                  <span className="px-2.5 py-0.5 rounded-full bg-slate-900 border border-slate-800 text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
-                    {diff.badge}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3">
-                  {diff.title}
-                </h3>
-                <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                  {diff.desc}
-                </p>
-              </div>
-              
-              <div className="pt-2 border-t border-slate-900/60 flex items-center text-xs text-purple-400 font-semibold group cursor-pointer hover:text-purple-300">
-                Saber mais <span className="ml-1 transform transition-transform group-hover:translate-x-1">→</span>
-              </div>
-            </div>
-          ))}
-        </div>
+        <Differentiators />
       </div>
 
       {/* Call to Action Container */}
@@ -159,14 +62,7 @@ export default function Home() {
           <p className="text-slate-400 mb-8 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
             Seja você um desenvolvedor buscando um ambiente ágil ou uma empresa procurando o match ideal sem burocracia, o JobSpark é o seu lugar.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/register?role=CANDIDATE" className="px-6 py-3 font-semibold text-white rounded-xl accent-glow-gradient hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 flex items-center justify-center">
-              Registrar Perfil Grátis
-            </Link>
-            <Link href="/register?role=COMPANY" className="px-6 py-3 font-semibold text-slate-300 rounded-xl bg-slate-900 border border-slate-800 hover:text-white transition-all duration-300 flex items-center justify-center">
-              Ver Planos de Contratação
-            </Link>
-          </div>
+          <LandingCtas size="md" />
         </div>
       </div>
     </div>

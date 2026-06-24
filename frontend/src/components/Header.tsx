@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
 import { useAuthStore } from '@/lib/authStore'
-import { LogOut, User as UserIcon, Briefcase, FileText, PlusCircle } from 'lucide-react'
+import { LogOut, User as UserIcon, Briefcase, FileText, PlusCircle, Cpu } from 'lucide-react'
 
 export default function Header() {
   const router = useRouter()
@@ -43,7 +43,11 @@ export default function Header() {
             <Link href="/" className={`hover:text-white transition-colors duration-200 ${pathname === '/' ? 'text-white font-bold' : ''}`}>
               Início
             </Link>
-            
+
+            <Link href="/ml-demo" className={`hover:text-white transition-colors duration-200 flex items-center gap-1.5 ${pathname === '/ml-demo' ? 'text-white font-bold' : ''}`}>
+              <Cpu className="h-4 w-4" /> JobMatch AI
+            </Link>
+
             {/* Candidate specific links */}
             {isAuthenticated && user?.role === 'CANDIDATE' && (
               <>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "../styles/globals.css";
 import Header from "@/components/Header";
 
@@ -43,9 +44,9 @@ export default function RootLayout({
               © {new Date().getFullYear()} JobSpark. Todos os direitos reservados. Feito para revolucionar o recrutamento.
             </p>
             <div className="flex gap-4 text-xs text-slate-400">
-              <a href="#" className="hover:text-white transition-colors">Termos</a>
-              <a href="#" className="hover:text-white transition-colors">Privacidade</a>
-              <a href="#" className="hover:text-white transition-colors">Contato</a>
+              <Link href="/termos" className="hover:text-white transition-colors">Termos</Link>
+              <Link href="/privacidade" className="hover:text-white transition-colors">Privacidade</Link>
+              <Link href="/contato" className="hover:text-white transition-colors">Contato</Link>
             </div>
           </div>
         </footer>

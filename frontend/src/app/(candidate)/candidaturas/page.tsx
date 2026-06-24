@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/lib/authStore'
 import { api } from '@/lib/api'
-import { Briefcase, MapPin, DollarSign, Sparkles, Loader2, Lock, CheckCircle2, ChevronDown, ChevronUp, XCircle, Trophy, BookOpen, AlertCircle, Award } from 'lucide-react'
+import { Briefcase, MapPin, DollarSign, Sparkles, Loader2, Lock, CheckCircle2, ChevronDown, ChevronUp, XCircle, Trophy, BookOpen, AlertCircle, Award, Trash2 } from 'lucide-react'
 
 interface Application {
   id: string
@@ -90,6 +90,24 @@ export default function CandidateApplicationsPage() {
     }
     init()
   }, [])
+
+  const [cancelingId, setCancelingId] = useState<string | null>(null)
+
+  const cancelApplication = async (id: string) => {
+    if (!confirm('Tem certeza que deseja cancelar esta candidatura? Esta ação não pode ser desfeita.')) return
+    setCancelingId(id)
+    try {
+      const token = localStorage.getItem('jobspark_token')
+      await api.delete(`/api/v1/applications/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      setApplications((prev) => prev.filter((a) => a.id !== id))
+    } catch (err: any) {
+      alert('Erro ao cancelar candidatura: ' + err.message)
+    } finally {
+      setCancelingId(null)
+    }
+  }
 
   if (isLoading) {
     return (
@@ -221,6 +239,17 @@ export default function CandidateApplicationsPage() {
                             {isExpanded ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
                           </button>
                         )}
+
+                        {/* Cancelar candidatura */}
+                        <button
+                          onClick={() => cancelApplication(app.id)}
+                          disabled={cancelingId === app.id}
+                          title="Cancelar candidatura"
+                          className="p-1.5 rounded-xl bg-slate-900 border border-slate-800 text-rose-400 hover:text-rose-300 hover:border-rose-500/30 transition-colors flex items-center gap-1 text-xs font-semibold cursor-pointer disabled:opacity-50"
+                        >
+                          {cancelingId === app.id ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Trash2 className="h-3.5 w-3.5" />}
+                          <span className="hidden sm:inline">Cancelar</span>
+                        </button>
                       </div>
                     </div>
 

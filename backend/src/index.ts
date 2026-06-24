@@ -9,6 +9,7 @@ import candidatesRoutes from './routes/candidates'
 import companiesRoutes from './routes/companies'
 import applicationsRoutes from './routes/applications'
 import aiRoutes from './routes/ai'
+import mlRoutes from './routes/ml'
 import { isAIMock, embeddingProvider } from './lib/gemini'
 
 const app = new Hono()
@@ -31,6 +32,7 @@ app.route('/api/v1/candidates', candidatesRoutes)
 app.route('/api/v1/companies', companiesRoutes)
 app.route('/api/v1/applications', applicationsRoutes)
 app.route('/api/v1/ai', aiRoutes)
+app.route('/api/v1/ml', mlRoutes)
 
 // 404
 app.notFound((c) => c.json({ error: 'Not found', code: 'NOT_FOUND' }, 404))

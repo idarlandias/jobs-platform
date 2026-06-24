@@ -1,0 +1,13 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#g)"/>
+  <!-- faísca principal (✨) -->
+  <path d="M32 9 C 34 25, 39 30, 55 32 C 39 34, 34 39, 32 55 C 30 39, 25 34, 9 32 C 25 30, 30 25, 32 9 Z" fill="#ffffff"/>
+  <!-- faísca secundária -->
+  <path d="M49 12 C 49.8 16.5, 51.5 18.2, 56 19 C 51.5 19.8, 49.8 21.5, 49 26 C 48.2 21.5, 46.5 19.8, 42 19 C 46.5 18.2, 48.2 16.5, 49 12 Z" fill="#ffffff" fill-opacity="0.92"/>
+</svg>

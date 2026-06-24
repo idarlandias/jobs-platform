@@ -258,4 +258,39 @@ app.patch('/:id/status', authMiddleware, async (c) => {
   }
 })
 
+// DELETE /api/v1/applications/:id - Candidato cancela (retira) a própria candidatura
+app.delete('/:id', authMiddleware, async (c) => {
+  try {
+    const id = c.req.param('id')
+    const user = c.get('user')
+
+    if (user.role !== 'CANDIDATE') {
+      return c.json({ error: 'Apenas candidatos podem cancelar candidaturas.', code: 'FORBIDDEN' }, 403)
+    }
+
+    const candidate = await prisma.candidate.findUnique({
+      where: { userId: user.userId },
+    })
+
+    if (!candidate) {
+      return c.json({ error: 'Perfil de candidato não encontrado.', code: 'NOT_FOUND' }, 404)
+    }
+
+    const application = await prisma.application.findUnique({
+      where: { id },
+    })
+
+    if (!application || application.candidateId !== candidate.id) {
+      return c.json({ error: 'Candidatura não encontrada ou não autorizada.', code: 'NOT_FOUND' }, 404)
+    }
+
+    await prisma.application.delete({ where: { id } })
+
+    return c.json({ message: 'Candidatura cancelada com sucesso.' })
+  } catch (error: any) {
+    console.error('Cancel application error:', error)
+    return c.json({ error: 'Erro ao cancelar candidatura: ' + error.message, code: 'INTERNAL_ERROR' }, 500)
+  }
+})
+
 export default app
